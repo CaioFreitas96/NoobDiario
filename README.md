@@ -29,6 +29,7 @@ Crie um novo arquivo php com o nome de "config.php" dentro da pasta config, copi
   'user' => '',    //configura de acordo com o user do seu MySQL
   
   'pass' => ''     //configura de acordo com a senha do seu MySQL
+  
 ],
 
 Inicie o seu servidor PHP na pasta NoobDiario-main digitando: php -S localhost: 8080 router.php
