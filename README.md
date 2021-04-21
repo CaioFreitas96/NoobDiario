@@ -17,11 +17,17 @@ Baixe o arquivo zip do projeto, extraia a pasta e abra no seu IDE
 Execute o script: "NoobDiario - Script para criar o banco" no seu IDE para MySQL
 
 Crie um novo arquivo php com o nome de "config.php" dentro da pasta config, copie as informações do arquivo config.php.dist e configure da seguinte maneira:
+
 'db' => [
+
   'drive' => 'mysql',
+  
   'host' => 'localhost',
-  'dbname' => 'NoobDiario'
+  
+  'dbname' => 'NoobDiario',
+  
   'user' => '',    //configura de acordo com o user do seu MySQL
+  
   'pass' => ''     //configura de acordo com a senha do seu MySQL
 ],
 
