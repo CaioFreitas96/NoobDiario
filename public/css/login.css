@@ -1,0 +1,81 @@
+/* Gerais */
+
+h1{
+    color:forestgreen;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .row {
+    margin: 1; 
+  }
+  
+  .container{
+    padding: 20px 30px;
+    
+  }
+  
+  /* header */
+  
+  header, .navbar{
+    
+    border:4px rgba(15, 1, 1, 0);
+  }
+  
+  .nav-container{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .navbar-brand{
+    padding: 0;
+    color: #fff;
+  }
+  
+  .navbar-brand:hover{
+    color: #fff;
+  }
+  
+  #navbar-links a{
+    font-size: 20px;
+    color: forestgreen;
+  }
+  
+  .navbar-expand-lg .navbar-nav .nav-link{
+    padding: 1rem .8rem;
+  }
+  nav a:hover{
+    color: rgb(27, 212, 89)!important; 
+  }
+  
+  .content{display: flex; justify-content: center;}
+  .login{width: 100%;max-width: 400px;}
+  .btn{text-align: center;}
+  .botao{font-size: 15px;border-color:forestgreen;background-color: rgb(255, 255, 255);color:forestgreen;
+    width: 100px;margin: 10px;font-weight: 800; text-align: center; }
+
+    
+ .bm{
+   text-align: center;
+ }  
+.botao:hover{
+    color: rgb(27, 212, 89)!important;  
+    border-color: rgb(27, 212, 89)!important; 
+} 
+
+ a{
+    font-size: 20px;
+    color: forestgreen;
+    
+ }
+
+ a:hover{
+    color: rgb(27, 212, 89)!important;   
+    text-decoration: none; 
+ }
+ hr{
+     border-color: forestgreen;
+ }
+ h3{
+  color: forestgreen;
+ }

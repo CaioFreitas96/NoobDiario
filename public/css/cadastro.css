@@ -1,0 +1,64 @@
+body
+    .cadastro{width: 100%;max-width: 1000px; margin-left: 100px;}
+    .form{display: flex;flex-direction: column;}
+    .field{padding: 10px; width:700px; border:2px solid #dddddd;border-radius: 5px;font-family: Arial, Helvetica, sans-serif;font-size: 16px;}
+    .placeholder{text-align: left;}
+
+   .content{display: center; margin-left: 100px;}
+  
+  .botao{font-size: 12px;border-color:forestgreen;background-color: rgb(255, 255, 255);color:forestgreen;
+    width:100px; height:30px ; margin: 30px;font-weight: 800;}
+  
+    .botao:hover{
+        color: rgb(27, 212, 89)!important;  
+        border-color: rgb(27, 212, 89)!important; 
+    } 
+    header, .navbar{
+    
+        border:4px rgba(15, 1, 1, 0);
+      }
+      
+      .nav-container{
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      
+      .navbar-brand{
+        padding: 0;
+        color: #fff;
+      }
+      
+      .navbar-brand:hover{
+        color: #fff;
+      }
+      
+      #navbar-links a{
+        font-size: 20px;
+        color: forestgreen;
+      }
+      
+      .navbar-expand-lg .navbar-nav .nav-link{
+        padding: 1rem .8rem;
+      }
+      nav a:hover{
+        color: rgb(27, 212, 89)!important; 
+      }
+      
+      h1{
+        color:forestgreen;
+        font-size: 40px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      
+      .row {
+        margin: 1; 
+      }
+      
+      .container{
+        padding: 20px 30px;
+        
+      }
+
+    hr{
+        border-color: forestgreen;
+    }
