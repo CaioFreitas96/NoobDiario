@@ -29,22 +29,40 @@
             <section class="content">
             <div class="login">
                 
-                <form action="/diario" method="POST">
+                <form action="/login" method="POST">
                     <div class="form-group">
                         <br></br>
+                        <?php 
+                        if(!isset($logins)){ ?>
                         <label>E-mail</label>
                         <input class="form-control"  name="email" placeholder="E-mail">
                         
                     </div>
                     <div class="form-group">
                         <label>Senha</label>
-                        <input class="form-control"  name="senha" placeholder="Senha">
+                        <input type="password" class="form-control"  name="senha" placeholder="Senha">
                     </div>
                     <div class="bm">
                         <button type="submit" class="botao">Login</button>
                         <br> 
                         
                     </div>
+                          <?php }else {
+                            echo "<h6 style=color:red; text-align:center>" . $mensagem . "</h6>" ?>
+                            <label>E-mail</label>
+                        <input class="form-control"  name="email" placeholder="E-mail">
+                        
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" class="form-control"  name="senha" placeholder="Senha">
+                    </div>
+                    <div class="bm">
+                        <button type="submit" class="botao">Login</button>
+                        <br> 
+                        
+                    </div>
+                        <?php } ?> 
                 </form>
             </div>        
         </section>

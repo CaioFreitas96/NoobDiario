@@ -24,9 +24,16 @@ class CadastroController extends Controller{
             //a variável dados é equivalente a isso: $dados = $request->post()
             //fazer essa converção é bom para coloca os nomes dos dados igual ao do banco, caso ele venha como o nome do formulario diferente a do banco
             //e fazer validações.
-            $resposta = $cadastroModel->inserir($dados);
 
-            $this->view('cadastroRealizado', ['resposta' => $resposta], ['dados' => $dados]);
+            $testeEmail = filter_var($request->post('email'), FILTER_VALIDATE_EMAIL);
+            
+            if($testeEmail == false){
+                //$email = " * E-mail invalido";
+                $this->view('cadastro', ['email' => '* E-mail invalido', 'nome' =>  $request->post('nome'), 'testeEmail' => $testeEmail] );
+            }else{
+                $resposta = $cadastroModel->inserir($dados);
+                $this->view('cadastroRealizado', ['resposta' => $resposta]);
+            }
         }
        
     }

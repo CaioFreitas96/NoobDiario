@@ -4,22 +4,36 @@ namespace App\Controllers;
 use Core\Controller;
 use App\Models\Login;
 use Core\Request;
+use App\Models\Anotacao;
 
 class LoginController extends Controller {
     
-    public function index() {
-        
-        $texto = "Noobframework da URL: localhost:8080/login";
+    public function index(Request $request) {
+        if($request->isMethod('get')){
+            $this->view('login');
+        }else{    
+            $loginModel = new Login();
 
-        $loginModel = new Login();
-        
+            $condicao = [
+                'email' => $request->post('email'),
+                'senha' => $request->post('senha')
+            ];
 
-        
-        
-        
-        $view = ['texto' => $texto];
-        //o segundo parâmetro da
-        $this->view('login', $view);
+            $logins = $loginModel->getAll($condicao);
+
+            $anotacaoModel = new Anotacao();
+
+            $anotacao = $anotacaoModel->getAll();
+    
+            
+            if(empty($logins)){
+                $mensagem = "* E-mail ou senha invalido";
+                $this->view('login', ['mensagem' => $mensagem, 'logins' => $logins]);
+            }else{
+                $view = ['logins' => $logins, 'anotacao' => $anotacao];
+                $this->view('anotacao', $view);
+            }
+        }
     }    
 
    

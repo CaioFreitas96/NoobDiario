@@ -10,7 +10,7 @@ class Anotacao{
     public function getAll(){
         $db = Database::getInstance();
 
-        return $db->getList($this->table, 'anotacao, dia');
+        return $db->getList($this->table, 'anotacao, dia', null, null, 'dia DESC');
     }
 
     //função criada para inserir dados no banco, vai receber os dados na variável $dados 

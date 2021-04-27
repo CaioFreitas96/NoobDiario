@@ -29,7 +29,8 @@ class DiarioController extends Controller {
         
                 
                 if(empty($logins)){
-                    $this->view('loginInvalido');
+                    $mensagem = "E-mail ou senha invalido";
+                    $this->view('login', ['mensagem' => $mensagem, 'logins' => $logins]);
                 }else{
                     $view = ['logins' => $logins, 'anotacao' => $anotacao];
                     $this->view('anotacao', $view);
