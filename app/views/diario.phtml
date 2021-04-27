@@ -33,6 +33,26 @@
                 </form>
             </div>
         </section>
+        <?php
+
+
+//echo $anotacao;
+foreach($anotacao as $anota){
+echo " 
+<section class='content'>
+    <div class='Anotacao'>
+        <h6><b>Anotação:  </b></h6>"
+        . $anota['dia'] . "
+        <table border width='100%' height='15% align='center'>
+            <tr>
+                <td align='center'> <br>" . $anota['anotacao'] . "</br><br></td>
+            </tr>
+        </table>
+    </div>
+</section>";
+}
+
+?>
     </body>
 </html>
     

@@ -31,7 +31,7 @@ class LoginController extends Controller {
                 $this->view('login', ['mensagem' => $mensagem, 'logins' => $logins]);
             }else{
                 $view = ['logins' => $logins, 'anotacao' => $anotacao];
-                $this->view('anotacao', $view);
+                $this->view('diario', $view);
             }
         }
     }    
