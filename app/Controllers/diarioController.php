@@ -9,7 +9,14 @@ class DiarioController extends Controller {
     
     public function index(Request $request) {
        if($request->isMethod('get')){
-        $this->view('diario'); 
+        
+        $getAnotacao = new Anotacao();
+        $anotacao = $getAnotacao->getAll();
+
+        $view = ['anotacao' => $anotacao];
+
+        $this->view('diario', $view); 
+
        }else{
            
         $AnotacaoModel = new Anotacao();
@@ -26,14 +33,33 @@ class DiarioController extends Controller {
         $AnotacaoModel->inserir($dados);
         
         //ver
-        $condicao = ['anotacao' => 'teste de data'];
-        $anotacao = $AnotacaoModel->getAll($condicao);
-
-        $view = ['anotacao' => $anotacao];
-
-        $this->view('anotacao', $view);
+        //$condicao = ['anotacao' => 'teste de data'];
+        $anotacao = $AnotacaoModel->getAll();
+        $id = $anotacao[0]['id'];
+        $view = ['anotacao' => $anotacao, 'id' => $id];
+        
+        $this->view('diario', $view);
         }
        
     }
-    
+    public function edita(Request $request){
+        
+        $anotacaoModel = new Anotacao();
+               
+
+        $botao = $request->post('excluir');
+        
+        $anotacao = $anotacaoModel->getAll();
+
+         
+                
+     
+       
+            
+        
+        $view = ['anotacao' => $anotacao];
+
+        $this->view('diario', $view);
+
+    }
 }

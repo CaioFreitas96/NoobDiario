@@ -10,7 +10,7 @@ class Anotacao{
     public function getAll(){
         $db = Database::getInstance();
 
-        return $db->getList($this->table, 'anotacao, dia', null, null, 'dia DESC');
+        return $db->getList($this->table, 'id, anotacao, dia', null, null, 'dia DESC');
     }
 
     //função criada para inserir dados no banco, vai receber os dados na variável $dados 
@@ -22,6 +22,15 @@ class Anotacao{
             return false;
         }else{
             return $db->insert($this->table, $dados);
+        }
+    }
+    public function deletar($condicao){
+        
+        $db = Database::Getinstance();
+        if($condicao == null){
+            return false;
+        }else{
+            return $db->delete($this->table, $condicao);
         }
     }
 }

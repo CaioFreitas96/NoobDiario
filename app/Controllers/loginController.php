@@ -6,33 +6,50 @@ use App\Models\Login;
 use Core\Request;
 use App\Models\Anotacao;
 
+
+
 class LoginController extends Controller {
     
     public function index(Request $request) {
         if($request->isMethod('get')){
-            $this->view('login');
+            
+            $get = "get";
+            $this->view('login', ['get' => $get]);
         }else{    
             $loginModel = new Login();
-
-            $condicao = [
-                'email' => $request->post('email'),
-                'senha' => $request->post('senha')
-            ];
-
-            $logins = $loginModel->getAll($condicao);
-
-            $anotacaoModel = new Anotacao();
-
-            $anotacao = $anotacaoModel->getAll();
-    
-            
-            if(empty($logins)){
-                $mensagem = "* E-mail ou senha invalido";
-                $this->view('login', ['mensagem' => $mensagem, 'logins' => $logins]);
+            $email = $request->post('email');
+            $validacao = filter_var($request->post('email'), FILTER_VALIDATE_EMAIL);
+           
+            if($validacao == false){
+                $this->view('login', ['validacao' => $validacao, 'email' => $email]);
             }else{
-                $view = ['logins' => $logins, 'anotacao' => $anotacao];
-                $this->view('diario', $view);
-            }
+
+                $email =  $request->post('email'); 
+                $senha =  $request->post('senha');
+                
+                $login = $loginModel->login($email, $senha);
+                
+               
+                if(empty($request->post('senha'))){
+
+                    $this->view('login', ['validacao' => $validacao, 'email' => $email, 'senhaVazia' => 'senhaVazia', 'login' => $login]);
+               
+                }else if($login === "email invalido"){
+                   
+                    $this->view('login', ['validacao' => $validacao, 'email' => $email, 'login' => $login]);
+                    
+                }else if($login == false){
+                   
+                    $this->view('login', ['validacao' => $validacao, 'email' => $email, 'login' => $login]);
+                    
+                }else{
+                
+                    $anotacaoModel = new Anotacao();
+                    $anotacao = $anotacaoModel->getAll();
+                    $view = ['login' => $login, 'anotacao' => $anotacao, 'senha' => $senha];
+                    $this->view('diario', $view);
+                }
+            }   
         }
     }    
 

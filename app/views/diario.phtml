@@ -25,10 +25,10 @@
         <section class="content">
             <div class="Anotacao">
                 <h6>Anotação</h6>
-                <form class="form" method="POST" action="/anotacao">
+                <form class="form" method="POST" action="/diario">
                     <input class="field" name="anotacao" placeholder="O que quer anotar ?">    
                     <div class="bt">
-                        <input class="botao" type="submit"> 
+                        <button class="botao" type="imput">Enviar</button> 
                     </div>      
                 </form>
             </div>
@@ -41,13 +41,17 @@ foreach($anotacao as $anota){
 echo " 
 <section class='content'>
     <div class='Anotacao'>
+
         <h6><b>Anotação:  </b></h6>"
-        . $anota['dia'] . "
+           . $anota['id']     . " / " . $anota['dia'] . "
         <table border width='100%' height='15% align='center'>
+            <form class='form' method='POST' action='/diario/edita' id='form'>
             <tr>
                 <td align='center'> <br>" . $anota['anotacao'] . "</br><br></td>
             </tr>
         </table>
+        <button class='botao' type='submit' form='form' name='editar'> Editar </button>
+        <button class='botao1' type='submit' form='form' name='excluir' value='" . $anota['id'] . "'> Excluir </button>
     </div>
 </section>";
 }

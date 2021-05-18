@@ -15,24 +15,28 @@ class CadastroController extends Controller{
         }else{
             $cadastroModel = new Cadastro();
             
-            $dados = [
-            //nome atribuito             nome do formulario
-                'nome' =>  $request->post('nome'),
-                'email' => filter_var($request->post('email'), FILTER_VALIDATE_EMAIL),
-                'senha' => $request->post('senha') 
-            ];
-            //a variável dados é equivalente a isso: $dados = $request->post()
-            //fazer essa converção é bom para coloca os nomes dos dados igual ao do banco, caso ele venha como o nome do formulario diferente a do banco
-            //e fazer validações.
+         
+           $email2 = ['email' => $request->post('email')];
+           $emailDuplicado = $cadastroModel->getEmail($email2);
+           
 
+            $validacaoNome = $request->post('nome');
             $testeEmail = filter_var($request->post('email'), FILTER_VALIDATE_EMAIL);
+            $validacaoSenha = $request->post('senha');
             
-            if($testeEmail == false){
+            if($testeEmail == false || $validacaoNome == null 
+            || $validacaoSenha == null || !empty($emailDuplicado)){
+
                 //$email = " * E-mail invalido";
-                $this->view('cadastro', ['email' => '* E-mail invalido', 'nome' =>  $request->post('nome'), 'testeEmail' => $testeEmail] );
+                $this->view('cadastro', ['emailDuplicado' => $emailDuplicado, 'email' => $request->post('email'), 'emailfalho' => '* E-mail invalido',
+                 'nome' =>  $request->post('nome'), 'testeEmail' => $testeEmail, 'erroNome' => "* Nome vazio",
+                  'validacaoNome' => $validacaoNome, 'erroSenha' => "* Senha vazia" ,'validacaoSenha' => $validacaoSenha]);
             }else{
-                $resposta = $cadastroModel->inserir($dados);
-                $this->view('cadastroRealizado', ['resposta' => $resposta]);
+                $resposta = $cadastroModel->inserir($request->post());
+
+                
+
+                $this->view('cadastroRealizado', ['resposta' => $resposta, 'emailDuplicado' => $emailDuplicado]);
             }
         }
        

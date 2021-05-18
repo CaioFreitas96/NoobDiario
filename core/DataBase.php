@@ -173,7 +173,7 @@ class DataBase {
      */
     public function delete(string $table, array $condition): bool {
         foreach($condition as $column => $value) {
-            $conditions[] = "$column = $value";
+            $conditions[] = "$column = '$value'";
         }
         $conditions = implode(' AND ', $conditions);
         $query = "DELETE FROM $table WHERE $conditions";

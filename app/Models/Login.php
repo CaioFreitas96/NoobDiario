@@ -7,10 +7,42 @@ use Core\Database;
 class Login {
     private $table = "login";
 
+    
     public function getAll($condicao){
         $db = Database::getInstance();
+        
+             return $db->getList($this->table, 'email, senha', $condicao);
+    }    
+    
 
-       return $db->getList($this->table, 'nome, email', $condicao);
+    public function login($email, $senha){
+        $db = Database::getInstance();
+        
+        $loginEmail = $db->getList($this->table, '*',  ['email' => $email]);
+       
+        
+
+        if(!empty($loginEmail)){
+           
+          $login = $loginEmail[0];       
+                        
+                
+                        
+                if(password_verify($senha, $login['senha'])){
+                
+                    return true;
+                        
+                }else{
+                    return false;
+                }
+          
+        }else{
+                return "email invalido";
+        }   
+
+        
+         
+         
     }
     
 

@@ -41,17 +41,62 @@
                         <input class="field" name="senha" placeholder="Senha">    
                         <!-- não precisa colocar NAME no botão, se não você vai enviar essa informação no formulario -->
                         <button class="botao" type="submit">Cadastrar</button> 
-                    <?php }else { ?>
-                        <input class="field" name="nome"  placeholder="Nome" value="<?= $nome ?>">
-                        <br>
-                        <a>E-mail: <?php echo"<h6 style=color:red >" . $email . "</h6>" ?></a> 
-                            <input class="field" name="email" placeholder="E-mail">
-                        <br>
-                        <a>Senha:</a>
-                            <input class="field" name="senha" placeholder="Senha">    
+                    <?php }else { 
+                            
+                            if(empty($validacaoNome)){
+                                echo "<h6 style=color:red>" . $erroNome . "</h6>" ?>
+                                <input class="field" name="nome"  placeholder="Nome" value="<?= $nome ?>">
+                                <br>
+                                <a>E-mail: </a> 
+                                <input class="field" name="email" placeholder="E-mail" value="<?= $email ?>">
+                                 <br>
+                                <a>Senha:</a>
+                                    <input class="field" name="senha" placeholder="Senha">    
                         <!-- não precisa colocar NAME no botão, se não você vai enviar essa informação no formulario -->
-                            <button class="botao" type="submit">Cadastrar</button> 
-                    <?php } ?>
+                                <button class="botao" type="submit">Cadastrar</button> 
+                           <?php  }else if(empty($validacaoSenha)){ ?>
+                        
+                            <input class="field" name="nome"  placeholder="Nome" value="<?= $nome ?>">
+                            <br>
+                            <a>E-mail: </a> 
+                                <input class="field" name="email" placeholder="E-mail" value="<?= $email ?>">
+                            <br>
+                            <a>Senha:</a>
+                            <?php echo "<h6 style=color:red>" . $erroSenha . "</h6>" ?>
+                                <input class="field" name="senha" placeholder="Senha">    
+                            <!-- não precisa colocar NAME no botão, se não você vai enviar essa informação no formulario -->
+                                <button class="botao" type="submit">Cadastrar</button>
+
+                        <?php 
+                            }
+                            else if(!empty($emailDuplicado)) { ?>
+                                <input class="field" name="nome"  placeholder="Nome" value="<?= $nome ?>">
+                            <br>
+                            <?php echo "<h6 style=color:red>* E-mail já cadastrado</h6>" ?>
+                            <a>E-mail: </a> 
+                                <input class="field" name="email" placeholder="E-mail" value="<?= $email ?>">
+                            <br>
+                            <a>Senha:</a>
+                            
+                                <input class="field" name="senha" placeholder="Senha" value="<?=$validacaoSenha?>">    
+                            <!-- não precisa colocar NAME no botão, se não você vai enviar essa informação no formulario -->
+                                <button class="botao" type="submit">Cadastrar</button>
+                       <?php }
+                            else { ?>
+                                <input class="field" name="nome"  placeholder="Nome" value="<?= $nome ?>">
+                            <br>
+                            <a>E-mail: <?php echo"<h6 style=color:red >" . $emailfalho . "</h6>" ?></a> 
+                                <input class="field" name="email" placeholder="E-mail" value="<?= $email ?>">
+                            <br>
+                            <a>Senha:</a>
+                            
+                                <input class="field" name="senha" placeholder="Senha" value="<?=$validacaoSenha?>">    
+                            <!-- não precisa colocar NAME no botão, se não você vai enviar essa informação no formulario -->
+                                <button class="botao" type="submit">Cadastrar</button>
+                          
+                        <?php  }
+                        
+                        } ?>
                     
                     
                           
