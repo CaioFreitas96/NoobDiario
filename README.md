@@ -4,11 +4,11 @@ Diario de anotações feito com o framework Noobframework do professsor Edigar
 
 ## Requisitos
 
-Necessario ter instalado na sua maquina o PHP8 para usar o servidor embutido e Visual C++.
+Necessario ter instalado em sua maquina o PHP8 para usar o servidor embutido e Visual C++.
 
 Configurar o arquivo php.ini habilitando a pasta de extensões e o pdo_mysql para o utilização do PDO
 
-Ter instalado na sua maquina o MySQL e um IDE para MySQL.
+Ter instalado em sua maquina o MySQL e um IDE para MySQL.
 
 ## Instalação
 
