@@ -12,6 +12,13 @@ class Anotacao{
 
         return $db->getList($this->table, 'id, anotacao, dia', null, null, 'dia DESC');
     }
+    public function getId($id){
+        $db = Database::getInstance();
+
+        $data = $db->getList($this->table, '*', ['id' => $id] );
+
+        return $data[0];
+    }
 
     //função criada para inserir dados no banco, vai receber os dados na variável $dados 
     //nessa função vc pode fazer uma verificação para ver se foi inseridos dados, não pode receber nulo e nem vazio
@@ -30,7 +37,7 @@ class Anotacao{
         if($condicao == null){
             return false;
         }else{
-            return $db->delete($this->table, $condicao);
+            return $db->delete($this->table, ['id' => $condicao]);
         }
     }
 }

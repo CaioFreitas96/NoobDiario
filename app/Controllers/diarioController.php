@@ -46,20 +46,35 @@ class DiarioController extends Controller {
         
         $anotacaoModel = new Anotacao();
                
-
-        $botao = $request->post('excluir');
+        $botao = $request->post();
+        var_dump($botao);
+        $verifica = array_key_exists("excluir",$botao);
         
-        $anotacao = $anotacaoModel->getAll();
+        var_dump($verifica);
 
-         
-                
-     
-       
-            
-        
-        $view = ['anotacao' => $anotacao];
+        if($verifica == true){
 
-        $this->view('diario', $view);
+            $id = $botao['excluir'];
+           
+            var_dump($id);
+
+            $deleta = $anotacaoModel->deletar($id);
+                        
+            $anotacao = $anotacaoModel->getAll();
+            $view = ['anotacao' => $anotacao];
+
+            $this->view('diario', $view);
+
+        }else{
+            echo "editar";
+
+            $anotacao = $anotacaoModel->getAll();
+            $view = ['anotacao' => $anotacao];
+
+            $this->view('diario', $view);
+        }
+
+      
 
     }
 }

@@ -33,30 +33,28 @@
                 </form>
             </div>
         </section>
-        <?php
-
-
-//echo $anotacao;
-foreach($anotacao as $anota){
-echo " 
+       
+       
+       
+<?php foreach($anotacao as $anota){ ?>
+ 
 <section class='content'>
     <div class='Anotacao'>
 
-        <h6><b>Anotação:  </b></h6>"
-           . $anota['id']     . " / " . $anota['dia'] . "
-        <table border width='100%' height='15% align='center'>
+        <h6><b>Anotação:  </b></h6>
+        <?= $anota['id']; ?>     /  <?= $anota['dia']; ?>
+        <table border width='100%' height="15%" align="center">
             <form class='form' method='POST' action='/diario/edita' id='form'>
             <tr>
-                <td align='center'> <br>" . $anota['anotacao'] . "</br><br></td>
+                <td align='center'> <br> <?= $anota['anotacao'] ?> </br><br></td>
             </tr>
         </table>
-        <button class='botao' type='submit' form='form' name='editar'> Editar </button>
-        <button class='botao1' type='submit' form='form' name='excluir' value='" . $anota['id'] . "'> Excluir </button>
+        <button class='botao' type='submit' form='form' name='editar' value="<?= $anota['id']?>"> Editar </button>
+        <button class='botao1'  type='submit' form='form' name='excluir' value="<?= $anota['id']?>"> Excluir </button>
+    
     </div>
 </section>";
-}
-
-?>
+<?php } ?>
     </body>
 </html>
     
