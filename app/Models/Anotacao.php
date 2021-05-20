@@ -40,4 +40,9 @@ class Anotacao{
             return $db->delete($this->table, ['id' => $condicao]);
         }
     }
+    public function atualizar($dados, $condicao){
+        $db = Database::getInstance();
+         
+        return $db->update($this->table, $dados, ['id' => $condicao]);
+    }
 }

@@ -19,26 +19,83 @@ class DiarioController extends Controller {
 
        }else{
            
-        $AnotacaoModel = new Anotacao();
+        $anotacaoModel = new Anotacao();
         
         date_default_timezone_set('America/Sao_Paulo');
         $data = date('y-m-d H:i:s');
         
-        //inserir
-        $dados = [
-            'anotacao' => $request->post('anotacao'),
-             'dia' => $data   
-        ];
-
-        $AnotacaoModel->inserir($dados);
+        $botao = $request->post();
+        $verifica = array_key_exists("update", $botao);
         
-        //ver
-        //$condicao = ['anotacao' => 'teste de data'];
-        $anotacao = $AnotacaoModel->getAll();
-        $id = $anotacao[0]['id'];
-        $view = ['anotacao' => $anotacao, 'id' => $id];
+        if($verifica == false){
+
+            //insert
+            $dados = [
+                'anotacao' => $request->post('anotacao'),
+                'dia' => $data   
+            ];
+
+                       
+            $texto = $request->post('anotacao');
+            
+            if(empty($texto)){
+
+                $anotacao = $anotacaoModel->getAll();
+        
+                $view = ['anotacao' => $anotacao, 'texto' => $texto];
+                $this->view('diario', $view);
+
+            }else{
+                
+                $anotacaoModel->inserir($dados);
+            }
+
+        }else{
+
+            $textoEdit = $request->post('anotacao');
+             
+           
+
+            if(empty($textoEdit)){
+
+                $anotacao = $anotacaoModel->getAll();
+               
+
+               
+                $dados = $request->post();
+            
+                $id = $dados['update'];
+    
+                $dados = $anotacaoModel->getId($id);
+
+                $view = ['anotacao' => $anotacao, 'textoEdit' => $textoEdit, 'dados' => $dados];
+                $this->view('diario', $view);
+                
+
+            }else{
+                
+                //update
+                
+            $dados = [
+                'anotacao' => $request->post('anotacao'),
+                'dia' => $data
+            ];
+
+            $id = $botao['update']; 
+            $anotacaoModel->atualizar($dados,$id); 
+            
+            }
+            
+
+        }
+        
+        //read        
+        $anotacao = $anotacaoModel->getAll();
+        
+        $view = ['anotacao' => $anotacao];
         
         $this->view('diario', $view);
+
         }
        
     }
@@ -47,17 +104,15 @@ class DiarioController extends Controller {
         $anotacaoModel = new Anotacao();
                
         $botao = $request->post();
-        var_dump($botao);
+        
         $verifica = array_key_exists("excluir",$botao);
         
-        var_dump($verifica);
+       
 
         if($verifica == true){
 
             $id = $botao['excluir'];
            
-            var_dump($id);
-
             $deleta = $anotacaoModel->deletar($id);
                         
             $anotacao = $anotacaoModel->getAll();
@@ -66,10 +121,16 @@ class DiarioController extends Controller {
             $this->view('diario', $view);
 
         }else{
-            echo "editar";
+            
 
             $anotacao = $anotacaoModel->getAll();
-            $view = ['anotacao' => $anotacao];
+            
+
+            $id = $botao['editar'];
+            
+            $dados = $anotacaoModel->getId($id);
+
+            $view = ['anotacao' => $anotacao, 'dados' => $dados];
 
             $this->view('diario', $view);
         }
