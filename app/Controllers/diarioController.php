@@ -29,7 +29,7 @@ class DiarioController extends Controller {
         
         if($verifica == false){
 
-            //insert
+            //insert enviar
             $dados = [
                 'anotacao' => $request->post('anotacao'),
                 'dia' => $data   
@@ -54,21 +54,17 @@ class DiarioController extends Controller {
 
             $textoEdit = $request->post('anotacao');
              
-           
-
             if(empty($textoEdit)){
 
                 $anotacao = $anotacaoModel->getAll();
-               
-
                
                 $dados = $request->post();
             
                 $id = $dados['update'];
     
-                $dados = $anotacaoModel->getId($id);
+                $update = $anotacaoModel->getId($id);
 
-                $view = ['anotacao' => $anotacao, 'textoEdit' => $textoEdit, 'dados' => $dados];
+                $view = ['anotacao' => $anotacao, 'vazio' => 'vazio', 'update' => $update];
                 $this->view('diario', $view);
                 
 
@@ -128,9 +124,9 @@ class DiarioController extends Controller {
 
             $id = $botao['editar'];
             
-            $dados = $anotacaoModel->getId($id);
+            $update = $anotacaoModel->getId($id);
 
-            $view = ['anotacao' => $anotacao, 'dados' => $dados];
+            $view = ['anotacao' => $anotacao, 'update' => $update];
 
             $this->view('diario', $view);
         }

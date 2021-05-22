@@ -27,49 +27,40 @@
             <hr>
             <br></br>
             <section class="content">
-            <div class="login">
-                <form action="/login" method="POST">
-                    <div class="form-group">
-                        <br></br>
-                        <?php if(isset($get)){?>
+                <div class="login">
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <br></br>
+                            <?php if(isset($get)){?>
 
-                            <label>E-mail</label>
-                                <input class="form-control"  name="email" placeholder="E-mail">
-                            </div>
-                            <div class="form-group">
-                                <label>Senha</label>
-                                <input type="password" class="form-control"  name="senha" placeholder="Senha">
-                            </div>
-                            <div class="bm">
-                                <button type="submit" class="botao">Login</button>
-                                <br> 
-                            </div>
+                                <label>E-mail</label>
+                                    <input class="form-control"  name="email" placeholder="E-mail">
+                                </div>
+                                <div class="form-group">
+                                    <label>Senha</label>
+                                    <input type="password" class="form-control"  name="senha" placeholder="Senha">
+                                </div>
+                                <div class="bm">
+                                    <button type="submit" class="botao">Login</button>
+                                    <br> 
+                                </div>
 
-                        <?php }else if(empty($validacao)){ 
-                                                
-                            echo "<h6 style=color:red>* E-mail invalido <br></h6>"; ?>
-
-                            <label>E-mail</label>
-                                <input class="form-control"  name="email" placeholder="E-mail" value="<?=$email?>">
-                            </div>
-                            <div class="form-group">
-                                <label>Senha</label>
-                                <input type="password" class="form-control"  name="senha" placeholder="Senha">
-                            </div>
-                            <div class="bm">
-                                <button type="submit" class="botao">Login</button>
-                                <br> 
-                            </div>
-                        
-                        
-
-                        <?php }else if($login == "email invalido" ){ ?>
-                                   
-                                   <?php echo "<h6 style=color:red>* E-mail não cadastrado <br></h6>"; ?>
-
+                            <?php }else{ ?>
+                                                    
+                                
+                                <?php if(isset($validacao)){
+                                    echo "<h6 style=color:red>* E-mail invalido <br></h6>"; 
+                                }else if($login == "email invalido"){
+                                    echo "<h6 style=color:red>* E-mail não cadastrado <br></h6>";
+                                }else if(isset($senhaVazia)){
+                                    echo "<h6 style=color:red>* Senha vazia <br></h6>";  
+                                }else if($login == false){
+                                    echo "<h6 style=color:red>* Senha invalida <br></h6>"; 
+                                } ?>   
+                                
                                     <label>E-mail</label>
-                                    <input  class="form-control"  name="email" placeholder="Email" value="<?= $email ?>">
-                                      <br>
+                                        <input class="form-control"  name="email" placeholder="E-mail" value="<?=$email?>">
+                                    </div>
                                     <div class="form-group">
                                         <label>Senha</label>
                                         <input type="password" class="form-control"  name="senha" placeholder="Senha">
@@ -78,43 +69,11 @@
                                         <button type="submit" class="botao">Login</button>
                                         <br> 
                                     </div>
-                                    
-                             <?php }else if(!empty($senhaVazia)){?>
-                            <?php echo "<h6 style=color:red>* Senha vazia <br></h6>"; ?>
-
-                            
-                            <label>E-mail</label>
-                                    <input  class="form-control"  name="email" placeholder="Email" value="<?= $email ?>">
-                                      <br>
-                                    <div class="form-group">
-                                        <label>Senha</label>
-                                        <input type="password" class="form-control"  name="senha" placeholder="Senha">
-                                    </div>
-                                    <div class="bm">
-                                        <button type="submit" class="botao">Login</button>
-                                        <br> 
-                                    </div>
-                    
-                            <?php }else if($login == false){?>
-                            <?php echo "<h6 style=color:red>* Senha invalida <br></h6>";   ?>
-    
-                                    <label>E-mail</label>
-                                    <input  class="form-control"  name="email" placeholder="Email" value="<?= $email ?>">
-                                      <br>
-                                    <div class="form-group">
-                                        <label>Senha</label>
-                                        <input type="password" class="form-control"  name="senha" placeholder="Senha">
-                                    </div>
-                                    <div class="bm">
-                                        <button type="submit" class="botao">Login</button>
-                                        <br> 
-                                    </div>
-                        
-                            <?php } ?>
-                </form>
-            </div>        
-        </section>
-        <?php 
+                        <?php } ?>     
+                    </form>
+                </div>        
+            </section>
+      
              
             
             

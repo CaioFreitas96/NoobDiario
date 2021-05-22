@@ -18,15 +18,12 @@ class Login {
     public function login($email, $senha){
         $db = Database::getInstance();
         
-        $loginEmail = $db->getList($this->table, '*',  ['email' => $email]);
-       
+        $login = $db->getList($this->table, '*',  ['email' => $email]);
         
-
-        if(!empty($loginEmail)){
+        
+        if(isset($login[0]['email'])){
            
-          $login = $loginEmail[0];       
-                        
-                
+            $login = $login[0];       
                         
                 if(password_verify($senha, $login['senha'])){
                 
@@ -40,12 +37,8 @@ class Login {
                 return "email invalido";
         }   
 
-        
-         
-         
     }
     
-
     //função criada para inserir dados no banco, vai receber os dados na variável $dados 
     //nessa função vc pode fazer uma verificação para ver se foi inseridos dados, não pode receber nulo e nem vazio
     public function inserir($dados){
@@ -62,6 +55,7 @@ class Login {
          
         return $db->update($this->table, $dados, $condicao );
     }
+
     // essa condição significa se não passa nada, ele não altera nada.
     public function deletar($id = null){
         $db = Database::getInstance();

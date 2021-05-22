@@ -22,56 +22,41 @@
         </header>
         <hr>
         <br>
-        <?php if(isset($dados)){ ?>
+        <?php if(isset($update)){ ?>
             
-                <?php if(isset($textoEdit)){;?>
-                    
-                    <section class="content">
-                            <div class="Anotacao">
-                                <h6>Editar:</h6> <b style=color:red align="center"> * Anotação vazia </b>
-                                <table border width='100%' height="15%" align="center">
-                                    <tr>
-                                        <td align='center'> <br> <?= $dados['anotacao'] ?> </br><br></td>
-                                    </tr>
-                                </table>
-                                <br>
-                                <form class="form" method="POST" action="/diario">
-                                    <input class="field" name="anotacao" align-text="center" placeholder="<?=$dados['anotacao']?>">    
-                                    <div class="bt">
-                                        <button class="botao" type="imput" name="update" value="<?=$dados['id']?>">Editar</button> 
-                                    </div>      
-                                </form>
-                            </div>
-                        </section> 
+                <section class="content">
+                    <div class="Anotacao">
+                
+                        <?php if(isset($vazio)){;?>
+                            <b style=color:red align="center"> * Anotação vazia </b>
+                        <?php } ?>
+                                           
+                        <h6>Editar:</h6>
+                         <table border width='100%' height="15%" align="center">
+                            <tr>
+                                <td align='center'> <br> <?= $update['anotacao'] ?> </br><br></td>
+                            </tr>
+                        </table>
+                            <br>
+                            <form class="form" method="POST" action="/diario">
+                                <input class="field" name="anotacao" align-text="center" placeholder="<?=$update['anotacao']?>">    
+                                <div class="bt">
+                                    <button class="botao" type="imput" name="update" value="<?=$update['id']?>">Editar</button> 
+                                </div>      
+                            </form>
+                    </div>
+                </section> 
+                      
 
-
-
-                <?php }else{   ?>
+        <?php }else{ ?>
+            
+            <section class="content">
+                <div class="Anotacao">
+                    <h6>Anotação:</h6>
+                    <?php if(isset($texto)){ ?>
+                        <b style=color:red align="center"> * Anotação vazia </b> 
+                    <?php } ?>
                         
-                        <section class="content">
-                            <div class="Anotacao">
-                                <h6>Editar:</h6>
-                                <table border width='100%' height="15%" align="center">
-                                    <tr>
-                                        <td align='center'> <br> <?= $dados['anotacao'] ?> </br><br></td>
-                                    </tr>
-                                </table>
-                                <br>
-                                <form class="form" method="POST" action="/diario">
-                                    <input class="field" name="anotacao" align-text="center" placeholder="<?=$dados['anotacao']?>">    
-                                    <div class="bt">
-                                        <button class="botao" type="imput" name="update" value="<?=$dados['id']?>">Editar</button> 
-                                    </div>      
-                                </form>
-                            </div>
-                        </section> 
-                <?php } ?>        
-
-        <?php }else if(isset($texto)){ ?>
-            
-            <section class="content">
-                <div class="Anotacao">
-                    <h6>Anotação</h6> <b style=color:red align="center"> * Anotação vazia </b>
                     <form class="form" method="POST" action="/diario">
                         <input class="field" name="anotacao" placeholder="O que você está pensando ?">    
                         <div class="bt">
@@ -80,64 +65,26 @@
                     </form>
                 </div>
             </section>
-       
-       
-            <?php foreach($anotacao as $anota){ ?>
- 
-            <section class='content'>
-                <div class='Anotacao'>
-
-                    <h6><b>Anotação:  </b></h6> 
-                    <?= $anota['id']; ?>     /  <?= $anota['dia']; ?>
-                    <table border width='100%' height="15%" align="center">
-                        <form class='form' method='POST' action='/diario/edita' id='form'>
-                        <tr>
-                            <td align='center'> <br> <?= $anota['anotacao'] ?> </br><br></td>
-                        </tr>
-                    </table>
-                    <button class='botao' type='submit' form='form' name='editar' value="<?= $anota['id']?>"> Editar </button>
-                    <button class='botao1'  type='submit' form='form' name='excluir' value="<?= $anota['id']?>"> Excluir </button>
-                
-                </div>
-            </section>";
-            <?php } ?>
-        
               
-        <?php }else{ echo""  ?>
-
-            <section class="content">
-                <div class="Anotacao">
-                    <h6>Anotação</h6>
-                    <form class="form" method="POST" action="/diario">
-                        <input class="field" name="anotacao" placeholder="O que você está pensando ?">    
-                        <div class="bt">
-                            <button class="botao" type="imput">Enviar</button> 
-                        </div>      
-                    </form>
-                </div>
-            </section>
-       
-       
             <?php foreach($anotacao as $anota){ ?>
  
-            <section class='content'>
-                <div class='Anotacao'>
+                <section class='content'>
+                    <div class='Anotacao'>
+                        <h6><b>Anotação:  </b></h6> <?= $anota['id']; ?>     /  <?= $anota['dia']; ?>
+                        <table border width='100%' height="15%" align="center">
+                            <form class='form' method='POST' action='/diario/edita' id='form'>
+                            <tr>
+                                <td align='center'> <br> <?= $anota['anotacao'] ?> </br><br></td>
+                            </tr>
+                        </table>
+                        <button class='botao' type='submit' form='form' name='editar' value="<?= $anota['id']?>"> Editar </button>
+                        <button class='botao1'  type='submit' form='form' name='excluir' value="<?= $anota['id']?>"> Excluir </button>
+                    </div>
+                </section>";
 
-                    <h6><b>Anotação:  </b></h6>
-                    <?= $anota['id']; ?>     /  <?= $anota['dia']; ?>
-                    <table border width='100%' height="15%" align="center">
-                        <form class='form' method='POST' action='/diario/edita' id='form'>
-                        <tr>
-                            <td align='center'> <br> <?= $anota['anotacao'] ?> </br><br></td>
-                        </tr>
-                    </table>
-                    <button class='botao' type='submit' form='form' name='editar' value="<?= $anota['id']?>"> Editar </button>
-                    <button class='botao1'  type='submit' form='form' name='excluir' value="<?= $anota['id']?>"> Excluir </button>
-                
-                </div>
-            </section>";
+            <?php } ?>
+                      
         <?php } ?>
-<?php } ?>
     </body>
 </html>
     
