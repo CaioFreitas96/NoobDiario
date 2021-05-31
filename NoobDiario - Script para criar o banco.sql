@@ -4,6 +4,8 @@ use NoobDiario;
 create table login(
 id int (2) not null primary key auto_increment,
 nome varchar(50) not null,
+cpf varchar(11) not null,
+telefone varchar(11) not null,
 email varchar(50) not null,
 senha varchar(20) not null
 );
