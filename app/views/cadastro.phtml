@@ -30,7 +30,7 @@
                     
                     <a>Nome:</a>
 
-                    <?php if(isset($get)) { ?>
+                    <?php if(isset($get)) {?>
                     <!-- o name server para o array visualizar o nome da variável enviado pelo imput -->
                         <input class="field" name="nome"  placeholder="Nome">
                         <br>
@@ -45,13 +45,17 @@
                         <input class="field" name="email" placeholder="E-mail">
                         <br>
                         <a>Senha:</a>
-                        <input class="field" name="senha" placeholder="Senha">    
+                        <input class="senha" type="password" name="senha" placeholder="Senha">  
+                        <a>Confirme senha:</a> 
+                        <input class="senha" type="password" name="confirm_senha" placeholder="Confirma senha">
+                          
                         <!-- não precisa colocar NAME no botão, se não você vai enviar essa informação no formulario -->
                         <button class="botao" type="submit">Cadastrar</button> 
                    
                     <?php }else{ ?>
                                 
                           <?php if(isset($nome)){ 
+                                    
                                     echo "<b style=color:red> * Nome vazio </b>"; 
                                 }?>
 
@@ -60,12 +64,14 @@
 
                                 <a>CPF:</a> 
                           <?php if(isset($cpf)){
+                              
                                     echo "<b style=color:red> * CPF invalido </b>";
                                 } ?>
                                 <input class="field" name="cpf" placeholder="CPF" value="<?=$dados['cpf']?>">
                                 <br>
                                 <a>Telefone:</a> 
                                 <?php if(isset($tel)){
+                                    
                                     echo "<b style=color:red> * Telefone invalido </b>";
                                 } ?>  
                                 <input class="field" name="telefone" placeholder="(xx)xxxx-xxxx" value="<?=$dados['telefone']?>">
@@ -73,17 +79,23 @@
                                 <h6>Dados de acesso:</h6>
                                 <a>E-mail:</a>
                                 <?php if(isset($email)){
+                                    
                                     echo "<b style=color:red> * E-mail invalido </b>";
                                 }
                                 if(isset($emailDuplicado)){
+                                    
                                     echo "<b style=color:red> * E-mail já cadatrado </b>";
                                 } ?>    
                                 <input class="field" name="email" placeholder="E-mail" value="<?=$dados['email']?>" >
                                 <br>
                                 <a>Senha:</a>
                                 <?php if(isset($senha)){
-                                    echo "<b style=color:red> *Senha no minimo com 8 caracteres</b>";
-                                } ?>  
+                                        if(empty($senha) || strlen($senha) < 8){
+                                            echo "<b style=color:red> *Senha no minimo com 8 caracteres</b>";
+                                        }else{
+                                            echo "<b style=color:red> *Senhas diferentes</b>";
+                                        }
+                                }?>  
                                 <input class="senha" type="password" name="senha" placeholder="Senha">
                                 <a>Confirme senha:</a> 
                                 <input class="senha" type="password" name="confirm_senha" placeholder="Confirma senha">

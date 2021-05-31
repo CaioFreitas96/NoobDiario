@@ -12,6 +12,7 @@ class CadastroController extends Controller{
     
     public function index(Request $request){
         if($request->isMethod('get')){
+            
             $this->view('cadastro', ['get' => 'get']);
         }else{
             $cadastroModel = new Cadastro();
@@ -39,6 +40,7 @@ class CadastroController extends Controller{
            
            //SENHA
            $senha = $request->post('senha');
+           $senha2 = $request->post('confirm_senha');
            $strlen = strlen($senha);
 
            //DADOS ENVIADOS POST
@@ -57,14 +59,14 @@ class CadastroController extends Controller{
                 }else{
                     $this->view('cadastro', ['emailDuplicado' => $emailDuplicado, 'dados' => $dados]);
                 }
-            }else if($senha == null || $strlen < 8 ){
-                $this->view('cadastro', ['senha' => $senha, 'dados' => $dados]);
+            }else if($senha == null || $strlen < 8 || $senha != $senha2){
+                $this->view('cadastro', ['senha' => $senha, 'senha2' => $senha2, 'dados' => $dados]);
             }else{
                 
                 $inserir = $cadastroModel->inserir($request->post());
                 $dados = $request->post();
                                 
-                unset($dados['cpf']);
+                
                 $this->view('cadastroRealizado', ['dados' => $dados] );
             }
         }

@@ -29,13 +29,17 @@ class Cadastro{
         }else{
                 if( isset($post['nome']) && 
                 filter_var($post['email'], FILTER_VALIDATE_EMAIL) &&
-                isset($post['senha'])){
+                isset($post['senha']) && isset($post['cpf']) && isset($post['telefone'])){
 
                     $post = [
                         //nome atribuito             nome do formulario
                             'nome' =>  $post['nome'],
                             'email' => filter_var($post['email'], FILTER_VALIDATE_EMAIL),
-                            'senha' => password_hash($post['senha'], PASSWORD_BCRYPT, ["cost" => 10]) 
+                            'senha' => password_hash($post['senha'], PASSWORD_BCRYPT, ["cost" => 10]),
+                            'cpf' => $post['cpf'],
+                            'telefone' => $post['telefone']
+                              
+
                         ];
 
                 return $db->insert($this->table, $post);
@@ -74,7 +78,7 @@ class Cadastro{
     function validaTelefone($tel){
         $numero = is_numeric($tel);
         if($numero == true){
-            if(strlen($tel) ==11){
+            if(strlen($tel) > 9 && strlen($tel) < 12){
                 return true;
             }else{
                 return false;
