@@ -7,10 +7,10 @@ use Core\Database;
 class Anotacao{
     private $table = 'diario';
 
-    public function getAll(){
+    public function getAll($user){
         $db = Database::getInstance();
 
-        return $db->getList($this->table, 'id, anotacao, dia', null, null, 'dia DESC');
+        return $db->getList($this->table, 'id, anotacao, dia', ['nome_login' => $user], null, 'dia DESC');
     }
     public function getId($id){
         $db = Database::getInstance();

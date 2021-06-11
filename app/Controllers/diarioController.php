@@ -21,10 +21,13 @@ class DiarioController extends Controller {
     public function index(Request $request) {
        if($request->isMethod('get')){
         
-        $getAnotacao = new Anotacao();
-        $anotacao = $getAnotacao->getAll();
-        
         $user = $this->session->get('user');
+        $user_nome = $user['nome'];
+
+        $getAnotacao = new Anotacao();
+        $anotacao = $getAnotacao->getAll($user_nome);
+               
+        
         $view = ['anotacao' => $anotacao, 'user' => $user];
 
         $this->view('diario', $view); 
@@ -40,21 +43,25 @@ class DiarioController extends Controller {
         $verifica = array_key_exists("update", $botao);
         
         if($verifica == false){
-
+            //session
+            $user = $this->session->get('user');
             //insert enviar
             $dados = [
                 'anotacao' => $request->post('anotacao'),
-                'dia' => $data   
+                'dia' => $data, 
+                'nome_login' => $user['nome']  
             ];
 
+            $user_nome = $user['nome'];
                        
             $texto = $request->post('anotacao');
             
             if(empty($texto)){
-
-                $anotacao = $anotacaoModel->getAll();
+               
                 $user = $this->session->get('user');
-                
+                $user_nome = $user['nome'];
+                $anotacao = $anotacaoModel->getAll($user_nome);
+                               
                 $view = ['anotacao' => $anotacao, 'texto' => $texto, 'user' => $user];
                 $this->view('diario', $view);
 
@@ -69,7 +76,9 @@ class DiarioController extends Controller {
              
             if(empty($textoEdit)){
 
-                $anotacao = $anotacaoModel->getAll();
+                $user = $this->session->get('user');
+                $user_nome = $user['nome'];
+                $anotacao = $anotacaoModel->getAll($user_nome);
                
                 $dados = $request->post();
             
@@ -98,8 +107,9 @@ class DiarioController extends Controller {
 
         }
         $user = $this->session->get('user');
+        $user_nome = $user['nome'];
         //read        
-        $anotacao = $anotacaoModel->getAll();
+        $anotacao = $anotacaoModel->getAll($user_nome);
         
         $view = ['anotacao' => $anotacao, 'user' => $user];
         
@@ -126,18 +136,18 @@ class DiarioController extends Controller {
         if($verifica == true){
 
             $id = $botao['excluir'];
-           
             $deleta = $anotacaoModel->deletar($id);
-                        
-            $anotacao = $anotacaoModel->getAll();
+           
+            $user_nome = $user['nome'];
+            $anotacao = $anotacaoModel->getAll($user_nome);
             $view = ['anotacao' => $anotacao, 'user' => $user];
 
             $this->view('diario', $view);
 
         }else{
             
-
-            $anotacao = $anotacaoModel->getAll();
+            $user_nome = $user['nome'];
+            $anotacao = $anotacaoModel->getAll($user_nome);
             
 
             $id = $botao['editar'];
