@@ -22,39 +22,40 @@ class LoginController extends Controller {
             $email = $request->post('email');
             $validacao = filter_var($request->post('email'), FILTER_VALIDATE_EMAIL);
            
-            if($validacao == false){
-                $this->view('login', ['validacao' => $validacao, 'email' => $email]);
+            if($validacao === false){
+                $erro = "E-mail invalido";
+                $this->view('login', ['erro' => $erro, 'email' => $email]);
             }else{
 
                 $email =  $request->post('email'); 
                 $senha =  $request->post('senha');
                 $login = $loginModel->login($email, $senha);
                 
-                               
-                if(empty($request->post('senha'))){
-
-                    $this->view('login', [ 'email' => $email, 'senhaVazia' => 'senhaVazia', 'login' => $login]);
-               
-                }else if($login === "email invalido"){
                    
-                    $this->view('login', ['email' => $email, 'login' => $login]);
-                    
-                }else if($login == false){
-                   
-                    $this->view('login', ['email' => $email, 'login' => $login]);
-                    
-                }else{
-                    
-                    $session = Session::getInstance();
-                    $session->set('login', $login);
-                    $anotacaoModel = new Anotacao();
-                    $anotacao = $anotacaoModel->getAll();
-                    $view = ['login' => $login, 'anotacao' => $anotacao ];
-                    $this->view('diario', $view);
+                switch($login){
+                    case false:
+                        $erro = "Senha invalida";
+                        break;
+                    case "email invalido":
+                        $erro = "E-mail não cadastrado";
+                        break;
+                           
                 }
-            }   
-        }
-    }    
 
-   
+                if(is_array($login)){
+                    $session = Session::getInstance();
+                    $user = $session->set('user', $login);
+                    $this->redirect('diario');
+                }else{
+                    $this->view('login', ['erro' => $erro, 'email' => $email]);
+                }    
+            }    
+        }
+    
+    }
+    public function logout(){
+        $session = Session::getInstance();
+        $session->destroy();
+        $this->redirect('../login');
+    }    
 }

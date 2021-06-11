@@ -48,15 +48,9 @@
                             <?php }else{ ?>
                                                     
                                 
-                                <?php if(isset($validacao)){
-                                    echo "<h6 style=color:red>* E-mail invalido <br></h6>"; 
-                                }else if($login == "email invalido"){
-                                    echo "<h6 style=color:red>* E-mail não cadastrado <br></h6>";
-                                }else if(isset($senhaVazia)){
-                                    echo "<h6 style=color:red>* Senha vazia <br></h6>";  
-                                }else if($login == false){
-                                    echo "<h6 style=color:red>* Senha invalida <br></h6>"; 
-                                } ?>   
+                                <?php if(isset($erro)){
+                                    echo "<h6 style=color:red>*" . $erro . "<br></h6>"; 
+                                }?>
                                 
                                     <label>E-mail</label>
                                         <input class="form-control"  name="email" placeholder="E-mail" value="<?=$email?>">

@@ -26,8 +26,9 @@ class Login {
             $login = $login[0];       
                         
                 if(password_verify($senha, $login['senha'])){
-                
-                    return true;
+                   
+                    unset($login['senha'], $login['cpf']);
+                    return $login;
                         
                 }else{
                     return false;
